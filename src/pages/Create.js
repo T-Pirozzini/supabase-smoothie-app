@@ -3,13 +3,23 @@ import { useNavigate } from "react-router-dom"
 import supabase from "../config/supabaseClient"
 
 const Create = () => {
+  const navigate = useNavigate()
+  
   const [title, setTitle] = useState('')
   const [method, setMethod] = useState('')
   const [rating, setRating] = useState('')
   const [formError, setFormError] = useState(null)
 
+const handleSubmit = async (e) => {
+  e.preventDefault()
+
+  if (!title || !method || !rating) {
+    setFormError('Please fill in all the fields correctly.')
+    return
+  }  
+
   const { data, error } = await supabase
-      .from('recipes')
+      .from('smoothies')
       .insert([{ title, method, rating }])
 
     if (error) {
@@ -25,7 +35,7 @@ const Create = () => {
 
   return (
     <div className="page create">
-      <form on Submit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
         <label htmlFor="title">Title:</label>
           <input 
             type="text" 
