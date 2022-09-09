@@ -112,3 +112,8 @@ form button {
   font-family: "poppins";
   cursor: pointer;
 }
+
+.add {
+  background-color: #6d15df;  
+  border-radius: 12px;  
+}
