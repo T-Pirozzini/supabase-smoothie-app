@@ -20,7 +20,7 @@ const Home = () => {
       const { data, error } = await supabase
         .from('smoothies')
         .select()
-
+        .order(orderBy, {ascending: false})
         if (error) {
           setFetchError('Could not fetch the smoothies')
           setSmoothies(null)
@@ -32,7 +32,7 @@ const Home = () => {
         }
     }
     fetchSmoothies()
-  }, [])
+  }, [orderBy])
 
   return (
     <div className="page home">
@@ -43,8 +43,7 @@ const Home = () => {
             <p>Order by:</p>
             <button onClick={() => setOrderBy('created_at')}>Time Created</button>
             <button onClick={() => setOrderBy('title')}>Title</button>
-            <button onClick={() => setOrderBy('rating')}>Rating</button>
-            {orderBy}
+            <button onClick={() => setOrderBy('rating')}>Rating</button>            
           </div>
           <div className="smoothie-grid">
             {smoothies.map(smoothie => (
